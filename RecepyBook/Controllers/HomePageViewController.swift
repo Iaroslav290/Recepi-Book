@@ -21,8 +21,10 @@ class HomePageViewController: UIViewController {
     
     var delegate: ViewControllerDelegate?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         configureElements()
@@ -31,6 +33,14 @@ class HomePageViewController: UIViewController {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+
+            // Fetch the wishlist data each time the view appears
+        WishListCollectionView.shared.fetchWishlistData()
+        }
+    
     func configureElements() {
         [/*menuButton,*/ headlineText, cookedLabel, searchView, searchImage, searchTextField, elementsOnScrollCollectionView, wishListLabel, WishListCollectionView.shared].forEach{
             view.addSubview($0)

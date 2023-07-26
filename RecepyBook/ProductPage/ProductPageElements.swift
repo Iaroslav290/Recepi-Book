@@ -29,9 +29,27 @@ let productLabel: UILabel = {
 let productDescription: UILabel = {
    let label = UILabel()
     label.text = "Description"
-    label.font = UIFont(name: "JetBrainsMono-Regular", size: 40)
+    label.font = UIFont(name: "JetBrainsMono-Regular", size: 30)
     label.textColor = .white
+    label.numberOfLines = 0
     return label
 }()
 
+let productIngredients: UILabel = {
+    let label = UILabel()
+     label.text = "Ingredients"
+     label.font = UIFont(name: "JetBrainsMono-Regular", size: 20)
+     label.textColor = .white
+     label.numberOfLines = 0
+     return label
+ }()
 
+
+let productRecept: UILabel = {
+    let label = UILabel()
+     label.text = "Recept"
+     label.font = UIFont(name: "JetBrainsMono-Regular", size: 14)
+     label.textColor = .white
+     label.numberOfLines = 0
+     return label
+}()

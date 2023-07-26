@@ -37,25 +37,33 @@ class ProductViewController: UIViewController {
         //        }
         
         
+        
+        
         if let product = selectedProduct {
 //                    productImageView.image = UIImage(named: selectedProduct.imageURL)
                     productLabel.text = product.name
                     productDescription.text = product.description
-            
-            let storageRef = Storage.storage().reference().child("food/")
+//            productDescription.text = "Ingredients: " + product.ingridients.joined(separator: ", ")
+            productIngredients.text = product.formattedIngredients
 
-                        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                            if let error = error {
-                                print("Error downloading image: \(error.localizedDescription)")
-                                // Handle the error appropriately (e.g., show a placeholder image)
-                            } else {
-                                // Image data is available in 'data', you can convert it to UIImage or use it as needed
-                                if let image = UIImage(data: data!) {
-                                    // Update the ImageView with the fetched image
-                                    productImageView.image = image
-                                }
-                            }
-                        }
+            productImageView.image = UIImage(named: "logo")
+            
+            productRecept.text = product.formattedRecept
+            
+            let storageRef = Storage.storage().reference().child("food/\(product.id)")
+
+                       storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                           if let error = error {
+                               print("Error downloading image: \(error.localizedDescription)")
+                               // Handle the error appropriately (e.g., show a placeholder image)
+                           } else {
+                               // Image data is available in 'data', you can convert it to UIImage or use it as needed
+                               if let image = UIImage(data: data!) {
+                                   // Update the ImageView with the fetched image
+                                   productImageView.image = image
+                               }
+                           }
+                       }
             
         } else {
             productLabel.text = "Error"
@@ -65,7 +73,7 @@ class ProductViewController: UIViewController {
     
     
     func configureElements() {
-        [productImageView, productLabel, productDescription].forEach{
+        [productImageView, productLabel, productDescription, productIngredients, productRecept].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -90,6 +98,13 @@ class ProductViewController: UIViewController {
             productDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (screenSize.width / 10)),
             productDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(screenSize.width / 10)),
             
+            productIngredients.topAnchor.constraint(equalTo: productDescription.bottomAnchor, constant: 10),
+            productIngredients.leadingAnchor.constraint(equalTo: productDescription.leadingAnchor),
+            productIngredients.trailingAnchor.constraint(equalTo: productDescription.trailingAnchor),
+            
+            productRecept.topAnchor.constraint(equalTo: productIngredients.bottomAnchor, constant: 10),
+            productRecept.leadingAnchor.constraint(equalTo: productDescription.leadingAnchor),
+            productRecept.trailingAnchor.constraint(equalTo: productDescription.trailingAnchor),
             
         ])
     }

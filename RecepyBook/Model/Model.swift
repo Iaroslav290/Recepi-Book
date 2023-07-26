@@ -37,3 +37,25 @@ struct CurrentUser {
     var id: String
     var email: String
 }
+
+
+//struct WishlistItem {
+//    var id: String
+//    var name: String
+//    var description: String
+//}
+
+
+//struct WishlistProduct {
+//    var name: String
+//    var id: String
+//    var description: String
+//    var type: String
+//    var time: String
+//    var ingridients: [String]
+//    
+//    var recept: [String]
+//    
+//    var timestamp: Date
+//    
+//}
